@@ -14,9 +14,9 @@ public class ProductMapper {
 		}
 		
 		return new ProductDTO(product.getId(), 
-				product.getCodProduct(), product.getStockProduct(), 
-				product.getDescProduct(), product.getPriceProduct(), 
-				product.getNcmProduct());
+				product.getCod(), product.getStock(), 
+				product.getDesc(), product.getPrice(), 
+				product.getNcm());
 	}
 	
 	public Product toEntity(ProductDTO productDTO) {
@@ -31,13 +31,13 @@ public class ProductMapper {
 		}
 		
 		if(productDTO.ncm() != null) {
-			product0.setNcmProduct(productDTO.ncm());
+			product0.setNcm(productDTO.ncm());
 		}
 		
-		product0.setCodProduct(productDTO.cod());
-		product0.setStockProduct(productDTO.stock());
-		product0.setDescProduct(productDTO.desc());
-		product0.setPriceProduct(productDTO.price());
+		product0.setCod(productDTO.cod());
+		product0.setStock(productDTO.stock());
+		product0.setDesc(productDTO.desc());
+		product0.setPrice(productDTO.price());
 		
 		return product0;
 	}

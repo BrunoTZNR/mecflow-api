@@ -1,7 +1,9 @@
 package com.mecflow.restapi.model;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import org.hibernate.validator.constraints.Length;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,7 +11,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "tb_service")
 public class Services implements Serializable{
@@ -19,40 +26,17 @@ public class Services implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotBlank
+	@Length(max = 120)
 	@Column(name = "desc_serv", nullable = false, length = 120)
 	private String desc;
 	
+	@NotNull
+	@Min(value = 0)
 	@Column(name = "amount_serv", nullable = false)
 	private Double amount;
 	
+	@NotNull
 	@Column(name = "dtCad_serv", nullable = false)
-	private LocalDate dtCad;
-
-	public String getDesc() {
-		return desc;
-	}
-
-	public void setDesc(String desc) {
-		this.desc = desc;
-	}
-
-	public Double getAmount() {
-		return amount;
-	}
-
-	public void setAmount(Double amount) {
-		this.amount = amount;
-	}
-
-	public LocalDate getDtCad() {
-		return dtCad;
-	}
-
-	public void setDtCad(LocalDate dtCad) {
-		this.dtCad = dtCad;
-	}
-
-	public Long getId() {
-		return id;
-	}
+	private LocalDateTime dtCad = LocalDateTime.now();
 }

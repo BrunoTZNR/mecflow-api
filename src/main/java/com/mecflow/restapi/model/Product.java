@@ -28,32 +28,30 @@ public class Product implements Serializable {
 	private Long id;
 	
 	@NotBlank
-	@NotNull
 	@Length(max = 15)
 	@Column(name = "cod_product", nullable = false, length = 15, unique = true)
-	private String codProduct;
+	private String cod;
 	
 	@NotNull
 	@Range(min = 0, max = 999)
 	@Column(name = "stock_product", nullable = false)
-	private Integer stockProduct = 0;
+	private Integer stock = 0;
 	
 	@NotBlank
-	@NotNull
 	@Length(max = 60)
 	@Column(name = "desc_product", nullable = false, length = 60)
-	private String descProduct;
+	private String desc;
 	
 	@NotNull
 	@Column(name = "dtCad_product", nullable = false)
-	private LocalDateTime dtCadProduct = LocalDateTime.now();
+	private LocalDateTime dtCad = LocalDateTime.now();
 	
 	@NotNull
 	@Min(value = 0)
 	@Column(name = "price_product", nullable = false)
-	private Double priceProduct;
+	private Double price;
 	
 	@Length(max = 10)
 	@Column(name = "ncm_product", nullable = true, length = 10)
-	private String ncmProduct = null;
+	private String ncm = null;
 }

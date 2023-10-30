@@ -55,11 +55,12 @@ public class ProductService {
 	public ProductDTO update(@Positive @NotNull Long id, @Valid @NotNull ProductDTO productDTO) {
 		return productRepository.findById(id)
 				.map(recordFound -> {
-					recordFound.setCodProduct(productDTO.cod());
-					recordFound.setStockProduct(productDTO.stock());
-					recordFound.setDescProduct(productDTO.desc());
-					recordFound.setPriceProduct(productDTO.price());
-					recordFound.setNcmProduct(productDTO.ncm());
+					recordFound.setCod(productDTO.cod());
+					recordFound.setStock(productDTO.stock());
+					recordFound.setDesc(productDTO.desc());
+					recordFound.setPrice(productDTO.price());
+					recordFound.setNcm(productDTO.ncm());
+					
 					return productMapper.toDTO(productRepository.save(recordFound));
 				})
 				.orElseThrow(() -> new RecordNotFoundException(id));
