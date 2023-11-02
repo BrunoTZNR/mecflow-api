@@ -1,6 +1,7 @@
 package com.mecflow.restapi.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.hibernate.validator.constraints.Length;
@@ -32,6 +33,10 @@ public class Payment implements Serializable{
 	@NotNull
 	@Column(name = "amount_pay", nullable = false)
 	private Double amount;
+	
+	@NotNull
+	@Column(name = "dt_pay", nullable = false)
+	private LocalDate dt;
 	
 	@NotNull
 	@Column(name = "dtCad_pay", nullable = false)

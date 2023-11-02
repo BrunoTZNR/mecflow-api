@@ -9,7 +9,9 @@ import jakarta.validation.constraints.Pattern;
 
 public record CarDTO(
 		
-		Long id,
+		@NotBlank(message = "Este campo é obrigatório")
+		@Length(min = 7, max = 7, message = "Tamanho obrigatório: 7")
+		String placa,
 		
 		@NotBlank(message = "Este campo é obrigatório")
 		@Length(max = 20, message = "Tamanho máximo do campo é 20")

@@ -14,7 +14,7 @@ public class CarMapper {
 			return null;
 		}
 		
-		return new CarDTO(c.getId(), c.getModel(), c.getAutomaker(), c.getFYear(),
+		return new CarDTO(c.getPlaca(), c.getModel(), c.getAutomaker(), c.getFYear(),
 				c.getMYear(), c.getColor(), c.getCapacity(), c.getEngine(), 
 				c.getFuel().getValue());
 	}
@@ -26,8 +26,8 @@ public class CarMapper {
 		
 		Car c0 = new Car();
 		
-		if(cDTO.id() != null) {
-			c0.setId(cDTO.id());
+		if(cDTO.placa() != null) {
+			c0.setPlaca(cDTO.placa());
 		}
 		
 		c0.setModel(cDTO.model());

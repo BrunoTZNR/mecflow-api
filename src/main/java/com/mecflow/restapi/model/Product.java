@@ -29,7 +29,7 @@ public class Product implements Serializable {
 	
 	@NotBlank
 	@Length(max = 15)
-	@Column(name = "cod_product", nullable = false, length = 15, unique = true)
+	@Column(name = "cod_product", nullable = false, length = 15)
 	private String cod;
 	
 	@NotNull

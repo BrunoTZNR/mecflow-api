@@ -11,8 +11,6 @@ import com.mecflow.restapi.enums.converters.FuelConverter;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
@@ -27,8 +25,10 @@ public class Car implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@NotBlank
+	@Length(max = 7, min = 7)
+	@Column(nullable = false, length = 7)
+	private String placa;
 	
 	@NotNull
 	@Column(name = "dtCad_car", nullable = false)

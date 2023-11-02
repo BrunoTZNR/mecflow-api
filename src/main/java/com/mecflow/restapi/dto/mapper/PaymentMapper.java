@@ -14,7 +14,7 @@ public class PaymentMapper {
 			return null;
 		}
 		
-		return new PaymentDTO(p.getId(), p.getAmount(), p.getTypePay().getValue(), p.getInstallments());
+		return new PaymentDTO(p.getId(), p.getAmount(), p.getDt(), p.getTypePay().getValue(), p.getInstallments());
 	}
 	
 	public Payment toEntity(PaymentDTO pDTO) {
@@ -32,6 +32,7 @@ public class PaymentMapper {
 			p0.setInstallments(pDTO.installments());
 		}
 		
+		p0.setDt(pDTO.dt());
 		p0.setAmount(pDTO.amount());
 		p0.setTypePay(convertTypePayValue(pDTO.typePay()));
 		

@@ -1,6 +1,10 @@
 package com.mecflow.restapi.dto;
 
+import java.time.LocalDate;
+
 import org.hibernate.validator.constraints.Length;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -12,6 +16,10 @@ public record PaymentDTO(
 		
 		@NotNull(message = "Este campo é obrigatório")
 		Double amount,
+		
+		@NotNull(message = "Este campo é obrigatório")
+		@JsonFormat(pattern = "yyyy-MM-dd")
+		LocalDate dt,
 		
 		@NotNull
 		@Length(max = 10, message = "Tamanho máximo do campo é 10")

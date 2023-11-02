@@ -25,6 +25,7 @@ import jakarta.validation.constraints.Positive;
 @Validated
 @RestController
 @RequestMapping("/api/v1/products")
+//@CrossOrigin(origins = "http://localhost:4200/")
 public class ProductController {
 	
 	@Autowired
@@ -34,15 +35,17 @@ public class ProductController {
 		this.productService = productService;
 	}
 	
+	@GetMapping("/{id}")
+	public ProductDTO findById(@PathVariable @NotNull @Positive Long id) {
+		return productService.findById(id);
+	}
+	
 	@GetMapping
 	public List<ProductDTO> list() {
 		return productService.list();
 	}
 	
-	@GetMapping("/{id}")
-	public ProductDTO findById(@PathVariable @NotNull @Positive Long id) {
-		return productService.findById(id);
-	}
+	
 	
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)

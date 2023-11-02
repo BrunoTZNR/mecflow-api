@@ -8,9 +8,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import com.mecflow.restapi.enums.Fuel;
 import com.mecflow.restapi.model.Car;
-import com.mecflow.restapi.model.Payment;
-import com.mecflow.restapi.model.Product;
+/*import com.mecflow.restapi.model.Payment;
+import com.mecflow.restapi.model.Product;*/
 import com.mecflow.restapi.model.Services;
 import com.mecflow.restapi.repository.CarRepository;
 import com.mecflow.restapi.repository.PaymentRepository;
@@ -30,13 +31,12 @@ public class MecflowApplication {
 			CarRepository cr,
 			PaymentRepository payr) {
 		return args -> {
-			pr.deleteAll();
+			//pr.deleteAll();
 			sr.deleteAll();
-			cr.deleteAll();
-			payr.deleteAll();
+			/*cr.deleteAll();
+			payr.deleteAll();*/
 			
-			//PRODUCT DEBUG
-			List<Product> p = new ArrayList<>(2);
+			/*List<Product> p = new ArrayList<>(2);
 			
 			Product p01 = new Product();
 			p01.setCod("P001");
@@ -55,9 +55,8 @@ public class MecflowApplication {
 			p.add(p01);
 			p.add(p02);
 			
-			pr.saveAll(p);
+			pr.saveAll(p);*/
 			
-			//SERVICES DEBUG
 			List<Services> s = new ArrayList<>(2);
 			
 			Services s01 = new Services();
@@ -73,19 +72,35 @@ public class MecflowApplication {
 			
 			sr.saveAll(s);
 			
-			//CAR DEBUG
-			/*List<Car> c = new ArrayList<>(2);
+			List<Car> c = new ArrayList<>(2);
 			
 			Car c01 = new Car();
+			c01.setPlaca("AAA0000");
+			c01.setModel("gol");
+			c01.setAutomaker("volkswagem");
+			c01.setFYear("2010");
+			c01.setMYear("2011");
+			c01.setEngine(8);
+			c01.setCapacity(1.0);
+			c01.setColor("prata");
+			c01.setFuel(Fuel.GASOLINA);
 			
 			Car c02 = new Car();
+			c02.setPlaca("BBB1111");
+			c02.setModel("civic");
+			c02.setAutomaker("honda");
+			c02.setFYear("1995");
+			c02.setMYear("1995");
+			c02.setEngine(16);
+			c02.setCapacity(1.8);
+			c02.setColor("ciano");
+			c02.setFuel(Fuel.GASOLINA);
 			
 			c.add(c01);
 			c.add(c02);
 			
-			cr.saveAll(c);*/
+			cr.saveAll(c);
 			
-			//PAYMENT DEBUG
 			/*List<Payment> pay = new ArrayList<>(2);
 			
 			Payment pay01 = new Payment();
