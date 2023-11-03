@@ -34,7 +34,7 @@ public class People implements Serializable{
 	@Column(name = "fName_people", nullable = false, length = 15)
 	private String fName;
 	
-	@Length(max = 15, min = 3)
+	@Length(max = 15)
 	@Column(name = "lName_people", nullable = true, length = 15)
 	private String lName;
 	

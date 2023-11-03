@@ -5,9 +5,7 @@ import org.hibernate.validator.constraints.Length;
 import jakarta.validation.constraints.NotBlank;
 
 public record ContactDTO(
-		
-		Long id,
-		
+
 		@NotBlank
 		@Length(max = 11, min = 11)
 		String phone,

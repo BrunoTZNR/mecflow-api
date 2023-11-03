@@ -26,7 +26,6 @@ public class ClientMapper {
 			
 			if(c.getPeople().getAddress() != null) {
 				a = new AddressDTO(
-					c.getPeople().getAddress().getId(),
 					c.getPeople().getAddress().getCep(),
 					c.getPeople().getAddress().getNumber(),
 					c.getPeople().getAddress().getStreet(),
@@ -39,14 +38,12 @@ public class ClientMapper {
 			
 			if(c.getPeople().getContact() != null) {
 				cont = new ContactDTO(
-					c.getPeople().getContact().getId(),
 					c.getPeople().getContact().getPhone(),
 					c.getPeople().getContact().getEmail(),
 					c.getPeople().getContact().getWhatsapp());
 			}
 			
 			p = new PeopleDTO(
-				c.getPeople().getId(),
 				c.getPeople().getFName(),
 				c.getPeople().getLName(),
 				c.getPeople().getDtNasc(),
@@ -68,7 +65,6 @@ public class ClientMapper {
 		}
 		
 		People p = new People();
-		p.setId(cDTO.people().id());
 		p.setFName(cDTO.people().fName());
 		p.setLName(cDTO.people().lName());
 		p.setDtNasc(cDTO.people().dtNasc());
@@ -76,7 +72,6 @@ public class ClientMapper {
 		if(cDTO.people().contact() != null) {
 			Contact cont = new Contact();
 			
-			cont.setId(cDTO.people().contact().id());
 			cont.setPhone(cDTO.people().contact().phone());
 			cont.setEmail(cDTO.people().contact().email());
 			cont.setWhatsapp(cDTO.people().contact().whatsapp());
@@ -87,7 +82,6 @@ public class ClientMapper {
 		if(cDTO.people().address() != null) {
 			Address a = new Address();
 			
-			a.setId(cDTO.people().address().id());
 			a.setCep(cDTO.people().address().cep());
 			a.setNumber(cDTO.people().address().number());
 			a.setStreet(cDTO.people().address().street());

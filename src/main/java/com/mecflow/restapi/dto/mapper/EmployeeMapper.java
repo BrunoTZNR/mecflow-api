@@ -26,7 +26,6 @@ public class EmployeeMapper {
 			
 			if(e.getPeople().getAddress() != null) {
 				a = new AddressDTO(
-					e.getPeople().getAddress().getId(),
 					e.getPeople().getAddress().getCep(),
 					e.getPeople().getAddress().getNumber(),
 					e.getPeople().getAddress().getStreet(),
@@ -39,14 +38,12 @@ public class EmployeeMapper {
 			
 			if(e.getPeople().getContact() != null) {
 				cont = new ContactDTO(
-					e.getPeople().getContact().getId(),
 					e.getPeople().getContact().getPhone(),
 					e.getPeople().getContact().getEmail(),
 					e.getPeople().getContact().getWhatsapp());
 			}
 			
 			p = new PeopleDTO(
-				e.getPeople().getId(),
 				e.getPeople().getFName(),
 				e.getPeople().getLName(),
 				e.getPeople().getDtNasc(),
@@ -68,7 +65,6 @@ public class EmployeeMapper {
 		}
 		
 		People p = new People();
-		p.setId(eDTO.people().id());
 		p.setFName(eDTO.people().fName());
 		p.setLName(eDTO.people().lName());
 		p.setDtNasc(eDTO.people().dtNasc());
@@ -76,7 +72,6 @@ public class EmployeeMapper {
 		if(eDTO.people().contact() != null) {
 			Contact cont = new Contact();
 			
-			cont.setId(eDTO.people().contact().id());
 			cont.setPhone(eDTO.people().contact().phone());
 			cont.setEmail(eDTO.people().contact().email());
 			cont.setWhatsapp(eDTO.people().contact().whatsapp());
@@ -87,7 +82,6 @@ public class EmployeeMapper {
 		if(eDTO.people().address() != null) {
 			Address a = new Address();
 			
-			a.setId(eDTO.people().address().id());
 			a.setCep(eDTO.people().address().cep());
 			a.setNumber(eDTO.people().address().number());
 			a.setStreet(eDTO.people().address().street());

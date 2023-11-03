@@ -9,14 +9,12 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotBlank;
 
 public record PeopleDTO(
-		
-		Long id,
-		
+
 		@NotBlank
 		@Length(max = 15, min = 3)
 		String fName,
 	
-		@Length(max = 15, min = 3)
+		@Length(max = 15)
 		String lName,
 		
 		@JsonFormat(pattern = "yyyy-MM-dd")

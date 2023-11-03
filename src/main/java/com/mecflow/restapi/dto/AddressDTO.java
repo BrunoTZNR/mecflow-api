@@ -2,13 +2,8 @@ package com.mecflow.restapi.dto;
 
 import org.hibernate.validator.constraints.Length;
 
-import jakarta.validation.constraints.NotBlank;
-
 public record AddressDTO(
-		
-		Long id,
-		
-		@NotBlank
+
 		@Length(max = 8, min = 8)
 		String cep,
 		

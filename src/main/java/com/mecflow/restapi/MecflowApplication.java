@@ -1,16 +1,16 @@
 package com.mecflow.restapi;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+/*import java.util.ArrayList;
+import java.util.List;*/
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import com.mecflow.restapi.model.Address;
-import com.mecflow.restapi.model.Client;
+/*import com.mecflow.restapi.model.Address;
+import com.mecflow.restapi.model.Client;*/
 import com.mecflow.restapi.model.Contact;
 import com.mecflow.restapi.model.Employee;
 import com.mecflow.restapi.model.People;
@@ -42,50 +42,31 @@ public class MecflowApplication {
 			EmployeeRepository empr) {
 		return args -> {
 			Contact cont01 = new Contact();
-			cont01.setPhone("61123456789");
+			cont01.setPhone("61999999999");
 			cont01.setEmail("admin@admin.com");
-			cont01.setWhatsapp("61123456789");
-			
-			Contact cont02 = new Contact();
-			cont02.setPhone("61987654321");
-			cont02.setEmail("user@user.com");
-			cont02.setWhatsapp("61987654321");
-			
-			Address address01 = new Address();
-			address01.setCep("12345678");
+			cont01.setWhatsapp("61999999999");
 			
 			People peo01 = new People();
 			peo01.setFName("Bruno");
 			peo01.setLName("Silva");
 			peo01.setDtNasc(LocalDate.of(2003, 1, 1));
 			peo01.setContact(cont01);
-			peo01.setAddress(address01);
 			
 			People peo02 = new People();
-			peo02.setFName("Renan");
-			peo02.setLName("Rodrigues");
-			peo02.setDtNasc(LocalDate.of(2003, 1, 11));
-			peo02.setContact(cont02);
-			
-			People peo03 = new People();
-			peo03.setFName("Italo");
-			peo03.setLName("Oliveira");
-			peo03.setDtNasc(LocalDate.of(2003, 1, 6));
-			
-			Client cli01 = new Client();
-			cli01.setCpf("01234567890");
-			cli01.setPeople(peo02);
-			
-			Client cli02 = new Client();
-			cli02.setPeople(peo03);
-			
+			peo02.setFName("Sergio");
+			peo02.setLName("Henrique");
+			peo02.setDtNasc(LocalDate.of(1986, 3, 20));
+
 			Employee emp01 = new Employee();
 			emp01.setComission(50.00);
 			emp01.setPeople(peo01);
 			
-			clir.save(cli01);
-			clir.save(cli02);
+			Employee emp02 = new Employee();
+			emp02.setComission(50.00);
+			emp02.setPeople(peo02);
+			
 			empr.save(emp01);
+			empr.save(emp02);
 			
 			/*pr.deleteAll();
 			sr.deleteAll();
