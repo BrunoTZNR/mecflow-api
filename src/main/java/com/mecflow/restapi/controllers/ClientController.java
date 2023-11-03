@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mecflow.restapi.dto.ProductDTO;
-import com.mecflow.restapi.service.ProductService;
+import com.mecflow.restapi.dto.ClientDTO;
+import com.mecflow.restapi.service.ClientService;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -24,41 +24,41 @@ import jakarta.validation.constraints.Positive;
 
 @Validated
 @RestController
-@RequestMapping("/api/v1/products")
-public class ProductController {
-	
+@RequestMapping("/api/v1/clients")
+public class ClientController {
+
 	@Autowired
-	private final ProductService productService;
+	private final ClientService clientService;
 	
-	public ProductController(ProductService productService) {
-		this.productService = productService;
+	public ClientController(ClientService clientService) {
+		this.clientService = clientService;
 	}
 	
 	@GetMapping
-	public List<ProductDTO> list() {
-		return productService.list();
+	public List<ClientDTO> list() {
+		return clientService.list();
 	}
 	
 	@GetMapping("/{id}")
-	public ProductDTO findById(@PathVariable @NotNull @Positive Long id) {
-		return productService.findById(id);
+	public ClientDTO findById(@PathVariable @Positive @NotNull Long id) {
+		return clientService.findById(id);
 	}
 	
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public ProductDTO create(@RequestBody @Valid ProductDTO productDTO) {
-		return productService.create(productDTO);
+	public ClientDTO create(@RequestBody @Valid ClientDTO clientDTO) {
+		return clientService.create(clientDTO);
 	}
 	
 	@PutMapping("/{id}")
-	public ProductDTO update(@PathVariable @NotNull @Positive Long id,
-			@RequestBody @Valid ProductDTO productDTO) {
-		return productService.update(id, productDTO);
+	public ClientDTO create(@PathVariable @Positive @NotNull Long id, 
+			@RequestBody @Valid ClientDTO clientDTO) {
+		return clientService.update(id, clientDTO);
 	}
 	
 	@DeleteMapping("/{id}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
-	public void delete(@PathVariable @NotNull @Positive Long id) {
-		productService.delete(id);
+	public void delete(@PathVariable @Positive @NotNull Long id) {
+		clientService.delete(id);
 	}
 }

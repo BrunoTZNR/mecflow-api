@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mecflow.restapi.dto.ProductDTO;
-import com.mecflow.restapi.service.ProductService;
+import com.mecflow.restapi.dto.EmployeeDTO;
+import com.mecflow.restapi.service.EmployeeService;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -24,41 +24,41 @@ import jakarta.validation.constraints.Positive;
 
 @Validated
 @RestController
-@RequestMapping("/api/v1/products")
-public class ProductController {
-	
+@RequestMapping("/api/v1/employees")
+public class EmployeeController {
+
 	@Autowired
-	private final ProductService productService;
+	private final EmployeeService employeeService;
 	
-	public ProductController(ProductService productService) {
-		this.productService = productService;
+	public EmployeeController(EmployeeService employeeService) {
+		this.employeeService = employeeService;
 	}
 	
 	@GetMapping
-	public List<ProductDTO> list() {
-		return productService.list();
+	public List<EmployeeDTO> list() {
+		return employeeService.list();
 	}
 	
 	@GetMapping("/{id}")
-	public ProductDTO findById(@PathVariable @NotNull @Positive Long id) {
-		return productService.findById(id);
+	public EmployeeDTO findById(@PathVariable @Positive @NotNull Long id) {
+		return employeeService.findById(id);
 	}
 	
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public ProductDTO create(@RequestBody @Valid ProductDTO productDTO) {
-		return productService.create(productDTO);
+	public EmployeeDTO create(@RequestBody @Valid EmployeeDTO employeeDTO) {
+		return employeeService.create(employeeDTO);
 	}
 	
 	@PutMapping("/{id}")
-	public ProductDTO update(@PathVariable @NotNull @Positive Long id,
-			@RequestBody @Valid ProductDTO productDTO) {
-		return productService.update(id, productDTO);
+	public EmployeeDTO create(@PathVariable @Positive @NotNull Long id, 
+			@RequestBody @Valid EmployeeDTO employeeDTO) {
+		return employeeService.update(id, employeeDTO);
 	}
 	
 	@DeleteMapping("/{id}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
-	public void delete(@PathVariable @NotNull @Positive Long id) {
-		productService.delete(id);
+	public void delete(@PathVariable @Positive @NotNull Long id) {
+		employeeService.delete(id);
 	}
 }
