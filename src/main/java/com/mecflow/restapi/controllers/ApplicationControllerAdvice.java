@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.mecflow.restapi.exception.CarNotFoundException;
 import com.mecflow.restapi.exception.DuplicateCodValueException;
 import com.mecflow.restapi.exception.RecordNotFoundException;
+import com.mecflow.restapi.exception.UserNotFoundException;
 
 @RestControllerAdvice
 public class ApplicationControllerAdvice {
@@ -27,6 +28,12 @@ public class ApplicationControllerAdvice {
 	@ExceptionHandler(DuplicateCodValueException.class)
 	@ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
 	public String handleDuplicateException(DuplicateCodValueException ex) {
+		return ex.getMessage();
+	}
+	
+	@ExceptionHandler(UserNotFoundException.class)
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	public String handleUserNotFoundException(UserNotFoundException ex) {
 		return ex.getMessage();
 	}
 }

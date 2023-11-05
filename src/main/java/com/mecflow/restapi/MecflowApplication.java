@@ -9,11 +9,15 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-/*import com.mecflow.restapi.model.Address;
-import com.mecflow.restapi.model.Client;*/
+//import com.mecflow.restapi.enums.Status;
+//import com.mecflow.restapi.model.Advance;
+//import com.mecflow.restapi.model.Address;
+//import com.mecflow.restapi.model.Client;
 import com.mecflow.restapi.model.Contact;
 import com.mecflow.restapi.model.Employee;
 import com.mecflow.restapi.model.People;
+import com.mecflow.restapi.model.User;
+import com.mecflow.restapi.repository.AdvanceRepository;
 /*import com.mecflow.restapi.enums.Fuel;
 import com.mecflow.restapi.model.Car;
 import com.mecflow.restapi.model.Payment;
@@ -25,6 +29,7 @@ import com.mecflow.restapi.repository.EmployeeRepository;
 import com.mecflow.restapi.repository.PaymentRepository;
 import com.mecflow.restapi.repository.ProductRepository;
 import com.mecflow.restapi.repository.ServicesRepository;
+import com.mecflow.restapi.repository.UserRepository;
 
 @SpringBootApplication
 public class MecflowApplication {
@@ -39,8 +44,18 @@ public class MecflowApplication {
 			CarRepository cr,
 			PaymentRepository payr,
 			ClientRepository clir,
-			EmployeeRepository empr) {
+			EmployeeRepository empr,
+			UserRepository userr,
+			AdvanceRepository adr) {
 		return args -> {
+			userr.deleteAll();
+			
+			User u0 = new User();
+			u0.setLogin("admin@admin.com");
+			u0.setPass("123456");
+			
+			userr.save(u0);
+			
 			Contact cont01 = new Contact();
 			cont01.setPhone("61999999999");
 			cont01.setEmail("admin@admin.com");

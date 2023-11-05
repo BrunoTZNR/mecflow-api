@@ -1,6 +1,7 @@
 package com.mecflow.restapi.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.hibernate.validator.constraints.Range;
 
@@ -11,8 +12,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
@@ -34,4 +37,12 @@ public class Employee implements Serializable{
 	@OneToOne(cascade = CascadeType.ALL, optional = false)
 	@JoinColumn(name = "people_id")
 	private People people;
+	
+	@Valid
+	@OneToMany(orphanRemoval = true, mappedBy = "employee")
+	private List<Advance> advances;
+	
+	@Valid
+	@OneToMany(orphanRemoval = true, mappedBy = "employee")
+	private List<Payday> paydays;
 }
