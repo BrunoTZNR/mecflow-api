@@ -3,65 +3,53 @@ package com.mecflow.restapi.dto.mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.mecflow.restapi.dto.AdvanceCreateDTO;
-import com.mecflow.restapi.dto.AdvanceDTO;
+import com.mecflow.restapi.dto.AdvanceRequestDTO;
+import com.mecflow.restapi.dto.AdvanceResponseDTO;
 import com.mecflow.restapi.enums.Status;
+import com.mecflow.restapi.exception.RecordNotFoundException;
 import com.mecflow.restapi.model.Advance;
-import com.mecflow.restapi.service.EmployeeService;
+import com.mecflow.restapi.repository.EmployeeRepository;
+
+import lombok.AllArgsConstructor;
 
 @Component
+@AllArgsConstructor
 public class AdvanceMapper {
+
+	@Autowired
+	private final EmployeeMapper empMapper;
 	
 	@Autowired
-	private final EmployeeMapper employeeMapper;
+	private final EmployeeRepository empRepository;
 	
-	@Autowired
-	private final EmployeeService employeeService;
-	
-	public AdvanceMapper(EmployeeMapper employeeMapper, EmployeeService employeeService) {
-		this.employeeMapper = employeeMapper;
-		this.employeeService = employeeService;
-	}
-	
-	public EmployeeMapper getEmployeeMapper() {
-		return employeeMapper;
-	}
-	
-	public AdvanceDTO toDTO(AdvanceCreateDTO aCDTO) {
-		if(aCDTO == null) {
-			return null;
-		}
-		
-		return new AdvanceDTO(aCDTO.id(), aCDTO.dt(), aCDTO.amount(), 
-				aCDTO.status(), employeeService.findById(aCDTO.employee_id()));
-	}
-	
-	public AdvanceDTO toDTO(Advance a) {
+	public AdvanceResponseDTO toDTO(Advance a) {
 		if(a == null) {
 			return null;
 		}
 		
-		return new AdvanceDTO(a.getId(), a.getDt(), a.getAmount(), 
-				a.getStatus().getValue(), employeeMapper.toDTO(a.getEmployee()));
+		return new AdvanceResponseDTO(a.getId(), a.getDt(), 
+				a.getAmount(), a.getStatus().getValue(), 
+				empMapper.toDTO(a.getEmployee()));
 	}
 	
-	public Advance toEntity(AdvanceDTO aDTO) {
-		if(aDTO == null) {
+	public Advance toEntity(AdvanceRequestDTO a) {
+		if(a == null) {
 			return null;
 		}
 		
-		Advance a0 = new Advance();
+		Advance ad0 = new Advance();
 		
-		if(aDTO.id() != null) {
-			a0.setId(aDTO.id());
+		if(a.id() != null) {
+			ad0.setId(a.id());
 		}
 		
-		a0.setDt(aDTO.dt());
-		a0.setAmount(aDTO.amount());
-		a0.setStatus(convertStatusValue(aDTO.status()));
-		a0.setEmployee(employeeMapper.toEntity(aDTO.employee()));
+		ad0.setDt(a.dt());
+		ad0.setAmount(a.amount());
+		ad0.setStatus(convertStatusValue(a.status()));
+		ad0.setEmployee(empRepository.findById(a.employee_id()).orElseThrow(() -> new RecordNotFoundException(a.employee_id())));
+		ad0.setPayday(null);
 		
-		return a0;
+		return ad0;
 	}
 	
 	public Status convertStatusValue(String value) {

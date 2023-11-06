@@ -3,6 +3,8 @@ package com.mecflow.restapi.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.validator.constraints.Range;
 
@@ -16,7 +18,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
@@ -41,8 +45,8 @@ public class Payday implements Serializable{
 	
 	@NotNull
 	@Range(min = 0, max = 9999)
-	@Column(name = "amount_pd", nullable = false)
-	private Double amount;
+	@Column(name = "salary_pd", nullable = false)
+	private Double salary;
 	
 	@NotNull
 	@Range(min = 0, max = 9999)
@@ -63,4 +67,12 @@ public class Payday implements Serializable{
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "employee_id", nullable = false)
 	private Employee employee;
+	
+	@Valid
+	@OneToMany(mappedBy = "payday", fetch = FetchType.LAZY)
+	private List<Advance> advances = new ArrayList<>();
+	
+	public void setTotalAmount() {
+		this.totalAmount = this.salary + this.amountCom - this.amountAd;
+	}
 }

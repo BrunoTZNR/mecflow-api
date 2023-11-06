@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mecflow.restapi.dto.AdvanceCreateDTO;
-import com.mecflow.restapi.dto.AdvanceDTO;
+import com.mecflow.restapi.dto.AdvanceRequestDTO;
+import com.mecflow.restapi.dto.AdvanceResponseDTO;
 import com.mecflow.restapi.service.AdvanceService;
 
 import jakarta.validation.Valid;
@@ -29,37 +29,37 @@ import jakarta.validation.constraints.Positive;
 public class AdvanceController {
 
 	@Autowired
-	private final AdvanceService advanceService;
+	private AdvanceService advanceService;
 	
 	public AdvanceController(AdvanceService advanceService) {
 		this.advanceService = advanceService;
 	}
 	
 	@GetMapping
-	public List<AdvanceDTO> list() {
+	public List<AdvanceResponseDTO> list() {
 		return advanceService.list();
 	}
 	
 	@GetMapping("/employee/{id}")
-	public List<AdvanceDTO> listOfEmployee(@PathVariable @Positive @NotNull Long id) {
+	public List<AdvanceResponseDTO> listOfEmployee(@PathVariable @Positive @NotNull Long id) {
 		return advanceService.listOfEmployee(id);
 	}
 	
 	@GetMapping("/{id}")
-	public AdvanceDTO findById(@PathVariable @Positive @NotNull Long id) {
+	public AdvanceResponseDTO findById(@PathVariable @Positive @NotNull Long id) {
 		return advanceService.findById(id);
 	}
 	
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public AdvanceDTO create(@RequestBody @NotNull @Valid AdvanceCreateDTO advanceCreateDTO) {
-		return advanceService.create(advanceCreateDTO);
+	public AdvanceResponseDTO create(@RequestBody @NotNull @Valid AdvanceRequestDTO advanceEmployeeDTO) {
+		return advanceService.create(advanceEmployeeDTO);
 	}
 	
 	@PutMapping("/{id}")
-	public AdvanceDTO update(@PathVariable @Positive @NotNull Long id, 
-			@RequestBody @NotNull @Valid AdvanceCreateDTO advanceCreateDTO) {
-		return advanceService.update(id, advanceCreateDTO);
+	public AdvanceResponseDTO update(@PathVariable @Positive @NotNull Long id, 
+			@RequestBody @NotNull @Valid AdvanceRequestDTO advanceEmployeeDTO) {
+		return advanceService.update(id, advanceEmployeeDTO);
 	}
 	
 	@DeleteMapping("/{id}")

@@ -11,6 +11,10 @@ public record EmployeeDTO(
 		Long id,
 		
 		@NotNull
+		@Range(min = 0, max = 9999)
+		Double salary,
+		
+		@NotNull
 		@Range(min = 0, max = 100)
 		Double comission,
 		

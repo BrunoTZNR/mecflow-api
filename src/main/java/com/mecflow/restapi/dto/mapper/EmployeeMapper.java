@@ -50,7 +50,7 @@ public class EmployeeMapper {
 				cont, a);
 		}
 		
-		return new EmployeeDTO(e.getId(), e.getComission(), p);
+		return new EmployeeDTO(e.getId(), e.getSalary(), e.getComission(), p);
 	}
 	
 	public Employee toEntity(EmployeeDTO eDTO) {
@@ -92,6 +92,7 @@ public class EmployeeMapper {
 			p.setAddress(a);
 		}
 		
+		e.setSalary(eDTO.salary());
 		e.setComission(eDTO.comission());
 		e.setPeople(p);
 		

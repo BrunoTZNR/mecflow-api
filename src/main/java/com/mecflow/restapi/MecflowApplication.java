@@ -73,6 +73,7 @@ public class MecflowApplication {
 			peo02.setDtNasc(LocalDate.of(1986, 3, 20));
 
 			Employee emp01 = new Employee();
+			emp01.setSalary(600.00);
 			emp01.setComission(50.00);
 			emp01.setPeople(peo01);
 			

@@ -30,6 +30,11 @@ public class Employee implements Serializable{
 	private Long id;
 	
 	@NotNull
+	@Range(min = 0, max = 9999)
+	@Column(name = "salary_employee", nullable = true)
+	private Double salary = 0.0;
+	
+	@NotNull
 	@Range(min = 0, max = 100)
 	@Column(name = "comission_employee", nullable = true)
 	private Double comission;

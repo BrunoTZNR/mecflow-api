@@ -32,6 +32,10 @@ public class EmployeeService {
 		this.employeeMapper = employeeMapper;
 	}
 	
+	public EmployeeMapper getEmployeeMapper() {
+		return employeeMapper;
+	}
+	
 	//all employees
 	public List<EmployeeDTO> list() {
 		return employeeRepository.findAll()
@@ -40,35 +44,43 @@ public class EmployeeService {
 				.collect(Collectors.toList());
 	}
 	
+	//all paydays of employee
+	/*public List<PaydayDTO> listOfEmployee(@Positive @NotNull Long id) {
+		return paydayRepository.findAllByEmployeeId(id)
+				.stream()
+				.map(paydayMapper::toDTO)
+				.collect(Collectors.toList());
+	}*/
+	
 	//one employee
-		public EmployeeDTO findById(@Positive @NotNull Long id) {
-			return employeeRepository.findById(id)
-					.map(employeeMapper::toDTO)
-					.orElseThrow(() -> new RecordNotFoundException(id));
-		}
-		
-		//create employee
-		public EmployeeDTO create(@Valid @NotNull EmployeeDTO employeeDTO) {
-			return employeeMapper.toDTO(employeeRepository.save(employeeMapper.toEntity(employeeDTO)));
-		}
-		
-		//update employee
-		public EmployeeDTO update(@Positive @NotNull Long id, @Valid @NotNull EmployeeDTO employeeDTO) {
-			return employeeRepository.findById(id)
-					.map(recordFound -> {
-						Employee employee = employeeMapper.toEntity(employeeDTO);
-						
-						recordFound.setComission(employee.getComission());
-						recordFound.setPeople(employee.getPeople());
-						
-						return employeeMapper.toDTO(employeeRepository.save(recordFound));
-					})
-					.orElseThrow(() -> new RecordNotFoundException(id));
-		}
-		
-		//delete employee
-		public void delete(@Positive @NotNull Long id) {
-			employeeRepository.delete(employeeRepository.findById(id)
-					.orElseThrow(() -> new RecordNotFoundException(id)));
-		}
+	public EmployeeDTO findById(@Positive @NotNull Long id) {
+		return employeeRepository.findById(id)
+				.map(employeeMapper::toDTO)
+				.orElseThrow(() -> new RecordNotFoundException(id));
+	}
+	
+	//create employee
+	public EmployeeDTO create(@Valid @NotNull EmployeeDTO employeeDTO) {
+		return employeeMapper.toDTO(employeeRepository.save(employeeMapper.toEntity(employeeDTO)));
+	}
+	
+	//update employee
+	public EmployeeDTO update(@Positive @NotNull Long id, @Valid @NotNull EmployeeDTO employeeDTO) {
+		return employeeRepository.findById(id)
+				.map(recordFound -> {
+					Employee employee = employeeMapper.toEntity(employeeDTO);
+					
+					recordFound.setComission(employee.getComission());
+					recordFound.setPeople(employee.getPeople());
+					
+					return employeeMapper.toDTO(employeeRepository.save(recordFound));
+				})
+				.orElseThrow(() -> new RecordNotFoundException(id));
+	}
+	
+	//delete employee
+	public void delete(@Positive @NotNull Long id) {
+		employeeRepository.delete(employeeRepository.findById(id)
+				.orElseThrow(() -> new RecordNotFoundException(id)));
+	}
 }

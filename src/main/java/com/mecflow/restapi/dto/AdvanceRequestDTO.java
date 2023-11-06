@@ -8,10 +8,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Positive;
 
-public record PaydayCreateDTO(
-
+public record AdvanceRequestDTO(
+		
 		Long id,
 		
 		@NotNull
@@ -22,23 +21,10 @@ public record PaydayCreateDTO(
 		@Range(min = 0, max = 9999)
 		Double amount,
 		
-		@NotNull
-		@Range(min = 0, max = 9999)
-		Double amountCom,
-		
-		@NotNull
-		@Range(min = 0, max = 9999)
-		Double amountAd,
-		
-		@NotNull
-		@Range(min = 0, max = 9999)
-		Double totalAmount,
-		
 		@NotNull(message = "Este campo é obrigatório")
 		@Pattern(regexp = "concluido|pendente|cancelado", message = "Tipo de pagamento inválido")
 		String status,
 		
 		@NotNull
-		@Positive
 		Long employee_id
 		) {}

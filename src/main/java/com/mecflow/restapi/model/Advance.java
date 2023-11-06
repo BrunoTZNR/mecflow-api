@@ -56,4 +56,8 @@ public class Advance implements Serializable{
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "employee_id", nullable = false)
 	private Employee employee;
+	
+	@ManyToOne(fetch = FetchType.LAZY, optional = true)
+	@JoinColumn(name = "payday_id", nullable = true)
+	private Payday payday;
 }
