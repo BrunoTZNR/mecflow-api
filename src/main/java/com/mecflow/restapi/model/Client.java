@@ -14,7 +14,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
@@ -33,7 +32,6 @@ public class Client implements Serializable{
 	private String cpf;
 	
 	@NotNull
-	@NotEmpty
 	@Valid
 	@OneToOne(cascade = CascadeType.ALL, optional = false)
 	@JoinColumn(name = "people_id")

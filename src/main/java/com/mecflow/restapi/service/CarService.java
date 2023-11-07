@@ -15,9 +15,11 @@ import com.mecflow.restapi.repository.CarRepository;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
 
 @Validated
 @Service
+@Getter
 public class CarService {
 
 	@Autowired

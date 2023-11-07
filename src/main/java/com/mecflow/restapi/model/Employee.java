@@ -39,6 +39,8 @@ public class Employee implements Serializable{
 	@Column(name = "comission_employee", nullable = true)
 	private Double comission;
 	
+	@NotNull
+	@Valid
 	@OneToOne(cascade = CascadeType.ALL, optional = false)
 	@JoinColumn(name = "people_id")
 	private People people;

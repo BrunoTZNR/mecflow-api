@@ -46,10 +46,10 @@ public class People implements Serializable{
 	private LocalDateTime dtCad = LocalDateTime.now();
 	
 	@OneToOne(cascade = CascadeType.ALL, optional = true)
-	@JoinColumn(name = "contact_id")
+	@JoinColumn(name = "contact_id", nullable = true)
 	private Contact contact;
 	
 	@OneToOne(cascade = CascadeType.ALL, optional = true)
-	@JoinColumn(name = "address_id")
+	@JoinColumn(name = "address_id", nullable = true)
 	private Address address;
 }
