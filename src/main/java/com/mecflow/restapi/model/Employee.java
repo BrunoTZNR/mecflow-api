@@ -46,10 +46,10 @@ public class Employee implements Serializable{
 	private People people;
 	
 	@Valid
-	@OneToMany(orphanRemoval = true, mappedBy = "employee")
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "employee")
 	private List<Advance> advances;
 	
 	@Valid
-	@OneToMany(orphanRemoval = true, mappedBy = "employee")
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "employee")
 	private List<Payday> paydays;
 }

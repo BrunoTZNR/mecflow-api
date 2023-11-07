@@ -1,8 +1,11 @@
 package com.mecflow.restapi.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.hibernate.validator.constraints.Length;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -11,6 +14,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.Valid;
@@ -36,4 +40,9 @@ public class Client implements Serializable{
 	@OneToOne(cascade = CascadeType.ALL, optional = false)
 	@JoinColumn(name = "people_id")
 	private People people;
+	
+	@Valid
+	@OneToMany(orphanRemoval = false, mappedBy = "client")
+	@JsonIgnore
+	private List<Os> os;
 }

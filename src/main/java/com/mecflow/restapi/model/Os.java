@@ -12,11 +12,12 @@ import com.mecflow.restapi.enums.converters.StatusConverter;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -45,22 +46,24 @@ public class Os implements Serializable{
 	
 	@Range(min = 0, max = 99999)
 	@Column(name = "totalAmount_os", nullable = true)
-	private Double totalAmount;
+	private Double totalAmount = 0.00;
 	
 	@Range(min = 0, max = 99999)
 	@Column(name = "totalDiscount_os", nullable = true)
-	private Double totalDiscount;
+	private Double totalDiscount = 0.00;
 	
 	@NotNull
 	@Column(name = "status_os", nullable = false, length = 10)
 	@Convert(converter = StatusConverter.class)
 	private Status status = Status.PENDENTE;
 	
-	@OneToOne(optional = false)
-	@JoinColumn(name = "client_id")
+	@NotNull
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "client_id", nullable = false)
 	private Client client;
 	
-	@OneToOne(optional = false)
-	@JoinColumn(name = "car_id")
+	@NotNull
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "car_id", nullable = false)
 	private Car car;
 }

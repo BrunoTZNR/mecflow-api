@@ -2,9 +2,11 @@ package com.mecflow.restapi.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mecflow.restapi.enums.Fuel;
 import com.mecflow.restapi.enums.converters.FuelConverter;
 
@@ -12,7 +14,9 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -73,4 +77,9 @@ public class Car implements Serializable{
 	@Column(name = "fuel_car", nullable = false, length = 8)
 	@Convert(converter = FuelConverter.class)
 	private Fuel fuel;
+	
+	@Valid
+	@OneToMany(orphanRemoval = true, mappedBy = "car")
+	@JsonIgnore
+	private List<Os> os;
 }
