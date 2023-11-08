@@ -18,10 +18,12 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 @Validated
 @Service
 @AllArgsConstructor
+@Getter
 public class OsService {
 
 	@Autowired

@@ -24,6 +24,7 @@ public class OsMapper {
 	@Autowired
 	private final ClientService clientService;
 	
+	/* REQUEST TO ENTITY */
 	public Os toEntity(OsRequestDTO o) {
 		if(o == null) {
 			return null;
@@ -48,6 +49,32 @@ public class OsMapper {
 		return os0;
 	}
 	
+	/* RESPONSE TO ENTITY */
+	public Os toEntity(OsResponseDTO o) {
+		if(o == null) {
+			return null;
+		}
+		
+		Os os0 = new Os();
+		
+		if(o.id() != null) {
+			os0.setId(o.id());
+		}
+		
+		os0.setDtIn(o.dtIn());
+		os0.setDtOut(o.dtOut());
+		os0.setTotalAmount(o.totalAmount());
+		os0.setTotalDiscount(o.totalDiscount());
+		os0.setStatus(convertStatusValue(o.status()));
+		os0.setCar(carService.getCarMapper()
+				.toEntity(carService.findByPlaca(o.car().placa())));
+		os0.setClient(clientService.getClientMapper()
+				.toEntity(clientService.findById(o.client().id())));
+	
+		return os0;
+	}
+	
+	/* ENTITY TO RESPONSE */
 	public OsResponseDTO toDTO(Os o) {
 		if(o == null) {
 			return null;

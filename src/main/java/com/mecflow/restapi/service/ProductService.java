@@ -15,9 +15,13 @@ import com.mecflow.restapi.repository.ProductRepository;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 @Validated
 @Service
+@AllArgsConstructor
+@Getter
 public class ProductService {
 
 	@Autowired
@@ -25,11 +29,6 @@ public class ProductService {
 	
 	@Autowired
 	private final ProductMapper productMapper;
-	
-	public ProductService(ProductRepository productRepository, ProductMapper productMapper) {
-		this.productRepository = productRepository;
-		this.productMapper = productMapper;
-	}
 	
 	//all products
 	public List<ProductDTO> list() {

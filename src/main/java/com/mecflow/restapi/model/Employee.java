@@ -52,4 +52,8 @@ public class Employee implements Serializable{
 	@Valid
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "employee")
 	private List<Payday> paydays;
+	
+	@Valid
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "employee")
+	private List<OsProducts> osProducts;
 }
