@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,5 +43,12 @@ public class OsServicesController {
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public OsServicesResponseDTO create(@RequestBody @Valid OsServicesRequestDTO osDTO) {
 		return osService.create(osDTO);
+	}
+	
+	@DeleteMapping("/{os_id}/{service_id}")
+	@ResponseStatus(code = HttpStatus.NO_CONTENT)
+	public void delete(@PathVariable @NotNull @Positive Long os_id, 
+			@PathVariable @NotNull @Positive Long service_id) {
+		osService.delete(os_id, service_id);
 	}
 }

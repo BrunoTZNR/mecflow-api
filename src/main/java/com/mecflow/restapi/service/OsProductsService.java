@@ -10,6 +10,7 @@ import org.springframework.validation.annotation.Validated;
 import com.mecflow.restapi.dto.OsProductsRequestDTO;
 import com.mecflow.restapi.dto.OsProductsResponseDTO;
 import com.mecflow.restapi.dto.mapper.OsProductsMapper;
+import com.mecflow.restapi.model.id.OsProductsId;
 import com.mecflow.restapi.repository.OsProductsRepository;
 
 import jakarta.validation.Valid;
@@ -41,5 +42,12 @@ public class OsProductsService {
 	//create osProducts
 	public OsProductsResponseDTO create(@Valid @NotNull OsProductsRequestDTO opDTO) {
 		return opMapper.toDTO(opRepository.save(opMapper.toEntity(opDTO)));
+	}
+	
+	//delete osProducts
+	public void delete(@NotNull @Positive Long os_id, @NotNull @Positive Long product_id) {
+		OsProductsId opId = new OsProductsId(os_id, product_id);
+		
+		opRepository.deleteById(opId);
 	}
 }

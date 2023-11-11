@@ -11,4 +11,5 @@ import com.mecflow.restapi.model.id.OsServicesId;
 @Repository
 public interface OsServicesRepository extends JpaRepository<OsServices, OsServicesId>{
 	List<OsServices> findAllByOsId(Long os_id);
+	void deleteById(OsServicesId id);
 }
