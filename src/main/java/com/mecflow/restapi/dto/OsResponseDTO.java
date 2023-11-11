@@ -1,6 +1,7 @@
 package com.mecflow.restapi.dto;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.hibernate.validator.constraints.Range;
 
@@ -38,5 +39,9 @@ public record OsResponseDTO(
 		
 		@NotNull
 		@NotEmpty
-		CarDTO car
+		CarDTO car,
+		
+		List<OsProductsResponseDTO> osProducts,
+		
+		List<OsServicesResponseDTO> osServices
 		) {}

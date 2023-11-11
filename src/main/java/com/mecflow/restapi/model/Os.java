@@ -76,4 +76,9 @@ public class Os implements Serializable{
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "os")
 	@JsonIgnore
 	private List<OsProducts> osProducts;
+	
+	@Valid
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "os")
+	@JsonIgnore
+	private List<OsServices> osServices;
 }

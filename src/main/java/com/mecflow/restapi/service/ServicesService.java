@@ -15,9 +15,13 @@ import com.mecflow.restapi.repository.ServicesRepository;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 @Validated
 @Service
+@AllArgsConstructor
+@Getter
 public class ServicesService {
 
 	@Autowired
@@ -25,11 +29,6 @@ public class ServicesService {
 	
 	@Autowired
 	private final ServicesMapper servicesMapper;
-	
-	public ServicesService(ServicesRepository servicesRepository, ServicesMapper servicesMapper) {
-		this.servicesRepository = servicesRepository;
-		this.servicesMapper = servicesMapper;
-	}
 	
 	//all services
 	public List<ServicesDTO> list() {
