@@ -32,8 +32,8 @@ public class PaymentService {
 	}
 	
 	//all payments
-	public List<PaymentDTO> list() {
-		return paymentRepository.findAll()
+	public List<PaymentDTO> list(@NotNull @Positive Long os_id) {
+		return paymentRepository.findAllByOsId(os_id)
 				.stream()
 				.map(paymentMapper::toDTO)
 				.collect(Collectors.toList());
@@ -67,5 +67,9 @@ public class PaymentService {
 	}
 	
 	//delete payment
-	
+	public void delete(@Positive @NotNull Long id) {
+		paymentRepository.delete(paymentRepository.findById(id)
+				.orElseThrow(() -> new RecordNotFoundException(id)));
+		
+	}
 }

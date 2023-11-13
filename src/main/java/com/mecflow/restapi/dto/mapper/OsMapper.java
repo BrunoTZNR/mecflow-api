@@ -11,6 +11,7 @@ import com.mecflow.restapi.dto.OsProductsResponseDTO;
 import com.mecflow.restapi.dto.OsRequestDTO;
 import com.mecflow.restapi.dto.OsResponseDTO;
 import com.mecflow.restapi.dto.OsServicesResponseDTO;
+import com.mecflow.restapi.dto.PaymentDTO;
 import com.mecflow.restapi.dto.ProductDTO;
 import com.mecflow.restapi.dto.ServicesDTO;
 import com.mecflow.restapi.enums.Status;
@@ -90,6 +91,7 @@ public class OsMapper {
 		
 		List<OsProductsResponseDTO> osProducts = new ArrayList<>();
 		List<OsServicesResponseDTO> osServices = new ArrayList<>();
+		List<PaymentDTO> payment = new ArrayList<>();
 		
 		if(o.getOsProducts() != null) {
 			osProducts = o.getOsProducts()
@@ -130,11 +132,21 @@ public class OsMapper {
 					.collect(Collectors.toList());
 		}
 		
+		if(o.getPayment() != null) {
+			payment = o.getPayment()
+					.stream()
+					.map(pay -> 
+						new PaymentDTO(pay.getId(), pay.getAmount(), pay.getDt(), 
+								pay.getTypePay().getValue(), pay.getInstallments(), pay.getOs().getId())
+					)
+					.collect(Collectors.toList());
+		}
+		
 		return new OsResponseDTO(o.getId(), o.getDtIn(), o.getDtOut(), 
 				o.getTotalAmount(), o.getTotalDiscount(), o.getStatus().getValue(), 
 				clientService.getClientMapper().toDTO(o.getClient()), 
 				carService.getCarMapper().toDTO(o.getCar()),
-				osProducts, osServices);
+				osProducts, osServices, payment);
 	}
 	
 	public Status convertStatusValue(String value) {

@@ -12,9 +12,12 @@ import com.mecflow.restapi.enums.converters.TypePayConverter;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -43,7 +46,6 @@ public class Payment implements Serializable{
 	private LocalDateTime dtCad = LocalDateTime.now();
 	
 	@NotNull
-	@Length(max = 10)
 	@Convert(converter = TypePayConverter.class)
 	@Column(name = "type_pay", nullable = false, length = 8)
 	private TypePay typePay;
@@ -52,4 +54,7 @@ public class Payment implements Serializable{
 	@Column(name = "installments", nullable = true)
 	private Integer installments = 1;
 
+	@ManyToOne(fetch = FetchType.LAZY, optional = true)
+	@JoinColumn(name = "os_id", nullable = true)
+    private Os os;
 }

@@ -22,10 +22,11 @@ public record PaymentDTO(
 		LocalDate dt,
 		
 		@NotNull
-		@Length(max = 10, message = "Tamanho máximo do campo é 10")
 		@Pattern(regexp = "credito|debito|dinheiro|pix", message = "Tipo de pagamento inválido")
 		String typePay,
 		
 		@Min(value = 1, message = "O valor não pode ser menor que 1")
-		Integer installments
+		Integer installments,
+		
+		Long os_id
 		) {}

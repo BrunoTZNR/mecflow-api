@@ -38,7 +38,7 @@ public class MecflowApplication {
 		SpringApplication.run(MecflowApplication.class, args);
 	}
 
-	@Bean
+	/*@Bean
 	CommandLineRunner initDatabase(ProductRepository pr,
 			ServicesRepository sr,
 			CarRepository cr,
@@ -84,5 +84,5 @@ public class MecflowApplication {
 			empr.save(emp01);
 			empr.save(emp02);
 		};
-	}
+	}*/
 }

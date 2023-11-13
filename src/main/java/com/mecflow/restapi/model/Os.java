@@ -81,4 +81,30 @@ public class Os implements Serializable{
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "os")
 	@JsonIgnore
 	private List<OsServices> osServices;
+	
+	@Valid
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "os")
+	@JsonIgnore
+	private List<Payment> payment;
+	
+	public void calcularAmounts() {
+		Double totalAmount = 0.0, totalDiscount = 0.0;
+		
+		if(this.osProducts != null) {
+			for(OsProducts op : this.osProducts) {
+				totalAmount += (op.getAmount() * op.getQuantity());
+				totalDiscount += op.getDiscount();
+			}
+		}
+		
+		if(this.osServices != null) {
+			for(OsServices os : this.osServices) {
+				totalAmount += (os.getAmount() * os.getQuantity());
+				totalDiscount += os.getDiscount();
+			}
+		}
+		
+		this.totalAmount = totalAmount;
+		this.totalDiscount = totalDiscount;
+	}
 }

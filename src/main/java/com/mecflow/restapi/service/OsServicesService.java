@@ -41,6 +41,8 @@ public class OsServicesService {
 	
 	//create osProducts
 	public OsServicesResponseDTO create(@Valid @NotNull OsServicesRequestDTO osDTO) {
+		osMapper.getOsService().updateAmounts(osDTO.id_os());
+		
 		return osMapper.toDTO(osRepository.save(osMapper.toEntity(osDTO)));
 	}
 	

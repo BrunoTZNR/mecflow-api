@@ -66,6 +66,8 @@ public class OsService {
 					recordFound.setCar(os0.getCar());
 					recordFound.setClient(os0.getClient());
 					
+					recordFound.calcularAmounts();
+					
 					return osMapper.toDTO(osRepository.save(recordFound));
 				})
 				.orElseThrow(() -> new RecordNotFoundException(id));
@@ -75,5 +77,16 @@ public class OsService {
 	public void delete(@Positive @NotNull Long id) {
 		osRepository.delete(osRepository.findById(id)
 				.orElseThrow(() -> new RecordNotFoundException(id)));
+	}
+	
+	//update amounts
+	public void updateAmounts(@Positive @NotNull Long id) {
+		osRepository.findById(id)
+			.map(recordFound -> {
+				recordFound.calcularAmounts();
+				
+				return osRepository.save(recordFound);
+			})
+			.orElseThrow(() -> new RecordNotFoundException(id));
 	}
 }

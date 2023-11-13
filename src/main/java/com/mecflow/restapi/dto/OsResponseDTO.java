@@ -43,5 +43,7 @@ public record OsResponseDTO(
 		
 		List<OsProductsResponseDTO> osProducts,
 		
-		List<OsServicesResponseDTO> osServices
+		List<OsServicesResponseDTO> osServices,
+		
+		List<PaymentDTO> payment
 		) {}
